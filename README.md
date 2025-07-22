@@ -2,84 +2,53 @@
 
 ## Descripción del proyecto
 
-Este repositorio es tu portafolio de **Data & AI** aplicado a la predicción de adopción de mascotas. Utilizamos el dataset de la competencia [PetFinder.my Adoption Prediction](https://www.kaggle.com/c/petfinder-adoption-prediction) para realizar un Análisis Exploratorio de Datos (EDA), limpieza de outliers y exploración de variables clave.
+Este repositorio es un portafolio de **Data & AI** aplicado a la predicción de adopción de mascotas. Utilizamos el dataset de [PetFinder.my Adoption Prediction](https://www.kaggle.com/c/petfinder-adoption-prediction) para realizar un Análisis Exploratorio de Datos (EDA), limpieza de outliers y exploración de variables clave.
 
 ## Objetivos
 
 * Comprender la estructura y calidad del dataset.
-* Identificar patrones que expliquen la velocidad de adopción (`AdoptionSpeed`).
-* Documentar hallazgos y pasos de limpieza.
+* Limpiar valores atípicos (por ejemplo, recorte de Age a 25 años).
+* Explorar variables relevantes (fotos, descripción, salud, etc.).
+* Construir un modelo baseline con RandomForest.
+* Mejorar el modelo con técnicas de balanceo (SMOTE) y texto (TF‑IDF).
+* Optimizar hiperparámetros y preparar pipeline reproducible.
 
 ## Requisitos
 
-* Python 3.8 o superior
-* Entorno virtual (venv o conda)
-* Librerías:
-
-  ```bash
-  pip install pandas numpy scikit-learn matplotlib seaborn jupyterlab
-  ```
-
-## Estructura del repositorio
-
-```
-pet-data-ai-consulting/
-├── data/                   # Datos raw descargados de Kaggle
-│   ├── train.csv
-│   ├── test.csv
-│   └── ...
-├── notebooks/              # Jupyter notebooks de EDA y limpieza
-│   ├── 01_EDA_petfinder.ipynb
-│   └── 02_Cleaning_and_Visualization.ipynb
-├── .gitignore
-└── README.md               # Este archivo
-```
+* Python 3.9 o superior
+* Paquetes: pandas, numpy, scikit-learn, imbalanced-learn, scipy, matplotlib, seaborn, jupyterlab
+* (Opcional) API de Kaggle configurada con `kaggle.json`
 
 ## Pasos para reproducir el EDA
 
-1. **Clonar el repositorio**
+1. Clona el repositorio y crea un entorno virtual:
 
    ```bash
    git clone https://github.com/TuUsuario/pet-data-ai-consulting.git
    cd pet-data-ai-consulting
-   ```
-
-2. **Crear y activar el entorno virtual**
-
-   ```bash
    python -m venv venv
-   source venv/bin/activate    # Linux/macOS
-   .\venv\Scripts\activate   # Windows PowerShell
-   ```
-
-3. **Instalar dependencias**
-
-   ```bash
+   source venv/bin/activate  # o .\venv\Scripts\activate en Windows
    pip install -r requirements.txt
    ```
-
-4. **Descargar y colocar los datos**
-   - Opción manual: descarga el ZIP desde Kaggle y extrae `train.csv` y `test.csv` en la carpeta `data/`.
-   - Opción CLI Kaggle:
-
-   ```bash
-   kaggle competitions download -c petfinder-adoption-prediction -p data
-   unzip data/petfinder-adoption-prediction.zip -d data
-   ```
-
-5. **Ejecutar JupyterLab**
+2. Descarga el dataset de Kaggle y descomprímelo en `data/`.
+3. Inicia JupyterLab:
 
    ```bash
    jupyter lab
    ```
+4. Ejecuta el Notebook `eda_petfinder.ipynb` para explorar y limpiar los datos.
 
-   * Abre los notebooks en `notebooks/` y sigue las instrucciones de cada uno.
+## Resultados y métricas
 
-## Notebooks clave
+A continuación se muestran las métricas de los principales modelos entrenados:
 
-* **01\_EDA\_petfinder.ipynb**: Inspección de estructura, nulos y distribuciones.
-* **02\_Cleaning\_and\_Visualization.ipynb**: Tratamiento de outliers (recorte de edades), variables de texto y gráficos de adopción.
+| Configuración                               | Accuracy | Macro F1 |
+| ------------------------------------------- | -------- | -------- |
+| Baseline (solo tabulares + class\_weight)   | 31.9 %   | 27.7 %   |
+| + TF‑IDF (texto) + SMOTE                    | 41.2 %   | 37.7 %   |
+| RF optimizado (RandomizedSearchCV reducido) | 40.7 %   | 36.0 %   |
+
 
 ---
 
-
+*¡Gracias por visitar mi portafolio! Cualquier feedback o colaboración, no dudes en contactarme.*
